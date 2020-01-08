@@ -123,12 +123,12 @@ func (g *Graph) postSetupEvaluate(src, dest int, shortest bool) (BestPath, error
 					//This seems familiar 8^)
 					return BestPath{}, newErrLoop(current.ID, v)
 				}
-				g.Verticies[v].distance = current.distance + dist
+				g.Verticies[v].distance = g.VertexCost(current.distance, dist)
 				g.Verticies[v].bestVerticies[0] = current.ID
 				if v == dest {
 					//If this is the destination update best, so we can stop looking at
 					// useless Verticies
-					g.best = current.distance + dist
+					g.best = g.VertexCost(current.distance, dist)
 					g.visitedDest = true
 					continue // Do not push if dest
 				}
