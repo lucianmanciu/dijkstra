@@ -116,8 +116,8 @@ func (g *Graph) postSetupEvaluate(src, dest int, shortest bool) (BestPath, error
 		}
 		for v, dist := range current.arcs {
 			//If the arc has better access, than the current best, update the Vertex being touched
-			if (shortest && current.distance+dist < g.Verticies[v].distance) ||
-				(!shortest && current.distance+dist > g.Verticies[v].distance) {
+			if (shortest && g.VertexCost(current.distance, dist) < g.Verticies[v].distance) ||
+				(!shortest && g.VertexCost(current.distance, dist) > g.Verticies[v].distance) {
 				if current.bestVerticies[0] == v && g.Verticies[v].ID != dest {
 					//also only do this if we aren't checkout out the best distance again
 					//This seems familiar 8^)
