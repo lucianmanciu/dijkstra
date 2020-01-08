@@ -14,7 +14,7 @@ Speed benefit use to diminish due to linked lists sucking at high nodes in queue
 Priority queues are used for nodes over 800, to gain this big increase in spead (about x15), it means there is some added overhead to initializing. Oddly this shouldn't be an issue at 16-256 nodes, but both still seem to take a significant performance hit.
 
 ## Documentation
-[godoc](https://godoc.org/github.com/RyanCarrier/dijkstra)
+[godoc](https://godoc.org/github.com/lucianmanciu/dijkstra)
 
 ## How to
 ### Generate a graph
