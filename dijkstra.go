@@ -30,11 +30,11 @@ func (g *Graph) setup(shortest bool, src int, list int) {
 	// and set the defaults *almost* as bad
 	// set all best verticies to -1 (unused)
 	if shortest {
-		g.setDefaults(int64(math.MaxInt64)-2, -1)
-		g.best = int64(math.MaxInt64)
+		g.setDefaults(float64(math.MaxInt64)-2, -1)
+		g.best = float64(math.MaxInt64)
 	} else {
-		g.setDefaults(int64(math.MinInt64)+2, -1)
-		g.best = int64(math.MinInt64)
+		g.setDefaults(float64(math.MinInt64)+2, -1)
+		g.best = float64(math.MinInt64)
 	}
 	//Set the distance of initial vertex 0
 	g.Verticies[src].distance = 0
@@ -150,7 +150,7 @@ func (g *Graph) finally(src, dest int) (BestPath, error) {
 
 //BestPath contains the solution of the most optimal path
 type BestPath struct {
-	Distance int64
+	Distance float64
 	Path     []int
 }
 

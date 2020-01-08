@@ -6,15 +6,15 @@ type Vertex struct {
 	//ID of the Vertex
 	ID int
 	//Best distance to the Vertex
-	distance      int64
+	distance      float64
 	bestVerticies []int
 	//A set of all weights to the nodes in the map
-	arcs map[int]int64
+	arcs map[int]float64
 }
 
 //NewVertex creates a new vertex
 func NewVertex(ID int) *Vertex {
-	return &Vertex{ID: ID, bestVerticies: []int{-1}, arcs: map[int]int64{}}
+	return &Vertex{ID: ID, bestVerticies: []int{-1}, arcs: map[int]float64{}}
 }
 
 //AddVerticies adds the listed verticies to the graph, overwrites any existing
@@ -44,9 +44,9 @@ func (v *Vertex) containsBest(id int) bool {
 // of the Vertex instead of a copy. Secondly, to ensure the destination is a valid
 // Vertex in the graph. Note that AddArc will overwrite any existing distance set
 // if there is already an arc set to Destination.
-func (v *Vertex) AddArc(Destination int, Distance int64) {
+func (v *Vertex) AddArc(Destination int, Distance float64) {
 	if v.arcs == nil {
-		v.arcs = map[int]int64{}
+		v.arcs = map[int]float64{}
 	}
 	v.arcs[Destination] = Distance
 }
@@ -60,7 +60,7 @@ func (v *Vertex) RemoveArc(Destination int) {
 }*/
 
 //GetArc gets the specified arc to Destination, bool is false if no arc found
-func (v *Vertex) GetArc(Destination int) (distance int64, ok bool) {
+func (v *Vertex) GetArc(Destination int) (distance float64, ok bool) {
 	if v.arcs == nil {
 		return 0, false
 	}

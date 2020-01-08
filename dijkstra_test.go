@@ -192,7 +192,7 @@ func benchmarkMM(b *testing.B, filename string) {
 	for _, d := range mgot {
 		total += d
 	}
-	if rcgot.Distance != int64(total) {
+	if rcgot.Distance != float64(total) {
 		b.Fatal("Distances do not match, RC:", rcgot.Distance, " MM:", total)
 	}
 	rcgot, _ = rcg.Shortest(rcsrc, rcdest)
@@ -201,7 +201,7 @@ func benchmarkMM(b *testing.B, filename string) {
 	for _, d := range mgot {
 		total += d
 	}
-	if rcgot.Distance != int64(total) {
+	if rcgot.Distance != float64(total) {
 		b.Fatal("Distances do not match on iteration 2, RC:", rcgot.Distance, " MM:", total)
 	}
 	//====RESET TIMER BEFORE LOOP====
@@ -218,12 +218,12 @@ func benchmarkAR(b *testing.B, filename string) {
 	src, dest := "0", strconv.Itoa(rcdest)
 	rcgot, _ := rcg.Shortest(rcsrc, rcdest)
 	_, argot, _ := arg.Path("0", dest)
-	if rcgot.Distance != int64(argot) {
+	if rcgot.Distance != float64(argot) {
 		b.Fatal("Distances do not match, RC:", rcgot.Distance, " AR:", argot)
 	}
 	rcgot, _ = rcg.Shortest(rcsrc, rcdest)
 	_, argot, _ = arg.Path("0", dest)
-	if rcgot.Distance != int64(argot) {
+	if rcgot.Distance != float64(argot) {
 		b.Fatal("Distances do not match on iteration 2, RC:", rcgot.Distance, " AR:", argot)
 	}
 	//====RESET TIMER BEFORE LOOP====
@@ -242,12 +242,12 @@ func benchmarkProfQ(b *testing.B, filename string) {
 	rcsrc, rcdest := 0, len(rcg.Verticies)-1
 	rcgot, _ := rcg.Shortest(rcsrc, rcdest)
 	pqgot := g.ShortestPath(src, dest)
-	if rcgot.Distance != int64(pqgot) {
+	if rcgot.Distance != float64(pqgot) {
 		b.Fatal("Distances do not match, RC:", rcgot.Distance, " PQ:", pqgot)
 	}
 	rcgot, _ = rcg.Shortest(rcsrc, rcdest)
 	pqgot = pq.NewGraph(pqmap).ShortestPath(src, dest)
-	if rcgot.Distance != int64(pqgot) {
+	if rcgot.Distance != float64(pqgot) {
 		b.Fatal("Distances do not match on iteration 2, RC:", rcgot.Distance, " PQ:", pqgot)
 	}
 	//====RESET TIMER BEFORE LOOP====

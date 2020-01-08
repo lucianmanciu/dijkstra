@@ -7,7 +7,8 @@ import (
 
 //Graph contains all the graph details
 type Graph struct {
-	best        int64
+	VertexCost  func(current *Vertex, cost float64) float64
+	best        float64
 	visitedDest bool
 	//slice of all verticies available
 	Verticies       []Vertex
@@ -19,7 +20,11 @@ type Graph struct {
 
 //NewGraph creates a new empty graph
 func NewGraph() *Graph {
-	new := &Graph{}
+	new := &Graph{
+		VertexCost: func(current *Vertex, cost float64) float64 {
+			return current.distance + cost
+		},
+	}
 	new.mapping = map[string]int{}
 	return new
 }
@@ -62,7 +67,7 @@ func (g Graph) validate() error {
 }
 
 //SetDefaults sets the distance and best node to that specified
-func (g *Graph) setDefaults(Distance int64, BestNode int) {
+func (g *Graph) setDefaults(Distance float64, BestNode int) {
 	for i := range g.Verticies {
 		g.Verticies[i].bestVerticies = []int{BestNode}
 		g.Verticies[i].distance = Distance

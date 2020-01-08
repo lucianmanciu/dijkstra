@@ -16,7 +16,7 @@ func Import(filename string) (g Graph, err error) {
 	var lowestIndex int
 	var i int
 	var arc int
-	var dist int64
+	var dist float64
 	var ok bool
 	got, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -50,7 +50,7 @@ func Import(filename string) (g Graph, err error) {
 			g.Verticies = append(g.Verticies, make([]Vertex, 1+i-len(g.Verticies))...)
 			for ; temp < len(g.Verticies); temp++ {
 				g.Verticies[temp].ID = temp
-				g.Verticies[temp].arcs = map[int]int64{}
+				g.Verticies[temp].arcs = map[int]float64{}
 				g.Verticies[temp].bestVerticies = []int{-1}
 			}
 		}
@@ -64,7 +64,7 @@ func Import(filename string) (g Graph, err error) {
 				err = ErrWrongFormat
 				return
 			}
-			dist, err = strconv.ParseInt(got[1], 10, 64)
+			dist, err = strconv.ParseFloat(got[1], 64)
 			if err != nil {
 				err = ErrWrongFormat
 				return
@@ -87,6 +87,7 @@ func Import(filename string) (g Graph, err error) {
 		}
 	}
 	err = g.validate()
+	g.VertexCost = func(current *Vertex, cost float64) float64 { return current.distance + cost }
 	return
 }
 
