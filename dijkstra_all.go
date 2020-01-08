@@ -32,16 +32,16 @@ func (g *Graph) postSetupEvaluateAll(src, dest int, shortest bool) (BestPaths, e
 		}
 		for v, dist := range current.arcs {
 			//If the arc has better access, than the current best, update the Vertex being touched
-			if (shortest && g.VertexCost(current, dist) < g.Verticies[v].distance) ||
-				(!shortest && g.VertexCost(current, dist) > g.Verticies[v].distance) ||
-				(g.VertexCost(current, dist) == g.Verticies[v].distance && !g.Verticies[v].containsBest(current.ID)) {
+			if (shortest && g.VertexCost(current.distance, dist) < g.Verticies[v].distance) ||
+				(!shortest && g.VertexCost(current.distance, dist) > g.Verticies[v].distance) ||
+				(g.VertexCost(current.distance, dist) == g.Verticies[v].distance && !g.Verticies[v].containsBest(current.ID)) {
 				//if g.Verticies[v].bestVertex == current.ID && g.Verticies[v].ID != dest {
 				if current.containsBest(v) && g.Verticies[v].ID != dest {
 					//also only do this if we aren't checkout out the best distance again
 					//This seems familiar 8^)
 					return BestPaths{}, newErrLoop(current.ID, v)
 				}
-				if g.VertexCost(current, dist) == g.Verticies[v].distance {
+				if g.VertexCost(current.distance, dist) == g.Verticies[v].distance {
 					//At this point we know it's not in the list due to initial check
 					g.Verticies[v].bestVerticies = append(g.Verticies[v].bestVerticies, current.ID)
 				} else {

@@ -116,7 +116,7 @@ func assertGraphsEqual(t *testing.T, a, b Graph) {
 
 func getAGraph() Graph {
 	return Graph{
-		func(current *Vertex, cost float64) float64 { return current.distance + cost },
+		func(current, next float64) float64 { return current + next },
 		0, false,
 		[]Vertex{
 			Vertex{0, 0, []int{-1}, map[int]float64{
@@ -147,7 +147,7 @@ func getAGraph() Graph {
 
 func getBGraph() Graph {
 	return Graph{
-		func(current *Vertex, cost float64) float64 { return current.distance + cost },
+		func(current, next float64) float64 { return current + next },
 		0, false,
 		[]Vertex{
 			Vertex{0, 0, []int{-1}, map[int]float64{
@@ -189,7 +189,7 @@ func getBSol() BestPath {
 
 func getCGraph() Graph {
 	return Graph{
-		func(current *Vertex, cost float64) float64 { return current.distance + cost },
+		func(current, next float64) float64 { return current + next },
 		0, false,
 		[]Vertex{
 			Vertex{0, 0, []int{-1}, map[int]float64{
@@ -224,7 +224,7 @@ func getCGraph() Graph {
 
 func getGGraph() (Graph, map[string]int) {
 	return Graph{
-			func(current *Vertex, cost float64) float64 { return current.distance + cost },
+			func(current, next float64) float64 { return current + next },
 			0, false,
 			[]Vertex{
 				Vertex{0, 0, []int{-1}, map[int]float64{
@@ -255,7 +255,7 @@ func getGGraph() (Graph, map[string]int) {
 
 func getIGraph() Graph {
 	return Graph{
-		func(current *Vertex, cost float64) float64 { return current.distance + cost },
+		func(current, next float64) float64 { return current + next },
 		0, false,
 		[]Vertex{
 			Vertex{0, 0, []int{-1}, map[int]float64{

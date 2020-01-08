@@ -87,7 +87,7 @@ func Import(filename string) (g Graph, err error) {
 		}
 	}
 	err = g.validate()
-	g.VertexCost = func(current *Vertex, cost float64) float64 { return current.distance + cost }
+	g.VertexCost = func(current, next float64) float64 { return current + next }
 	return
 }
 

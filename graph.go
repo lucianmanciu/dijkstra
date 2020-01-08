@@ -7,7 +7,7 @@ import (
 
 //Graph contains all the graph details
 type Graph struct {
-	VertexCost  func(current *Vertex, cost float64) float64
+	VertexCost  func(curr, next float64) float64
 	best        float64
 	visitedDest bool
 	//slice of all verticies available
@@ -21,8 +21,8 @@ type Graph struct {
 //NewGraph creates a new empty graph
 func NewGraph() *Graph {
 	new := &Graph{
-		VertexCost: func(current *Vertex, cost float64) float64 {
-			return current.distance + cost
+		VertexCost: func(current, next float64) float64 {
+			return current + next
 		},
 	}
 	new.mapping = map[string]int{}
